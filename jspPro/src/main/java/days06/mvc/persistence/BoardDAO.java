@@ -1,10 +1,9 @@
-package days04.board.persistence;
+package days06.mvc.persistence;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import days04.board.domain.BoardDTO;
-
+import days06.mvc.domain.BoardDTO;
 
 public interface BoardDAO {
 	// 1. 게시글 목록 조회 + 페이징 처리 X

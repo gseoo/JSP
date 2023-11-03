@@ -4,23 +4,19 @@
 <%
 	String id = request.getParameter("id");
 	String passwd = request.getParameter("passwd");
-	String location = "ex07_default.jsp";
+	String location = "ex01_default.jsp";
 	
 	if(id.equals("admin") && passwd.equals("1234")) { // 관리자 로그인 성공
-		// auth 쿠키 이름 로그인ID 저장
-		Cookie c = Cookies.createCookie("auth", id, "/", -1);
-		response.addCookie(c);
+		session.setAttribute("auth", id);
 		response.sendRedirect(location);
 	} else if(id.equals("hong") && passwd.equals("1234")) {
-		Cookie c = Cookies.createCookie("auth", id, "/", -1);
-		response.addCookie(c);
+		session.setAttribute("auth", id);
 		response.sendRedirect(location);
 	} else if(id.equals("park") && passwd.equals("1234")) {
-		Cookie c = Cookies.createCookie("auth", id, "/", -1);
-		response.addCookie(c);
+		session.setAttribute("auth", id);
 		response.sendRedirect(location);
 	} else {
-		location = "ex07_default.jsp?logon=fail";
+		location = "ex01_default.jsp?logon=fail";
 		response.sendRedirect(location);
 	}
 %>

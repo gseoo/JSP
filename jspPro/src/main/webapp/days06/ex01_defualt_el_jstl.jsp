@@ -37,54 +37,41 @@
     	[ex01_default.jsp]
   		</xmp>
   		
-  		<%
-  			if(logonID == null) { // 로그인 하지 않은 상태
-  		%>
-  		<div id="logon">
-			<form action="ex01_logon.jsp">
-				아이디 : <input type="text" name="id" value="admin" /><br>
-    			비밀번호 : <input type="password" name="passwd" value="1234" /><br>
-			    <input type="submit" value="로그인" />
-			    <input type="button" value="회원가입" />
-			    <span style="color:red;display: none">로그인 실패했습니다.</span> 
-		  </form>
-  		</div>
-  		<% 
-  			} else { // 로그인 성공
-  		%>	
-  		<div id="logout">
-  			[ <%= logonID %> ]님 환영합니다<br>
-  			 <a href="ex01_logout.jsp">로그아웃</a>
-  		</div>
-  		<%	
-  			}
-  		%>
+  		<c:choose>
+  			<c:when test="${empty logonID }">
+				<div id="logon">
+					<form action="ex01_logon.jsp">
+						아이디 : <input type="text" name="id" value="admin" /><br>
+					 	비밀번호 : <input type="password" name="passwd" value="1234" /><br>
+					    <input type="submit" value="로그인" />
+					    <input type="button" value="회원가입" />
+					    <span style="color:red;display: none">로그인 실패했습니다.</span> 
+					</form>
+				</div>
+  			</c:when>
+  			<c:otherwise>
+  				<div id="logout">
+		  			[ <%= logonID %> ]님 환영합니다<br>
+		  			 <a href="ex01_logout.jsp">로그아웃</a>
+		  		</div>
+  			</c:otherwise>
+  		</c:choose>
   		
   		<!-- 인증 X -->
   		<a href="/jspPro/cstvsboard/list.htm">게시판</a><br>
   		<a href="#">공지사항</a><br>
   		
   		<!-- 인증 O -->
-  		<%
-  			if(logonID != null) {
-  		%>
-  		<a href="#">자료실</a><br>
-  		<a href="#">일정관리</a><br>
-  		<%
-  			}
-  		%>
-  		
-  		
+  		<c:if test="${not empty logonID }">
+  			<a href="#">자료실</a><br>
+  			<a href="#">일정관리</a><br>
+  		</c:if>
+
   		<!-- 인증 O + 관리자 권한 == admin 인증 -->
-  		<%
-  			if(logonID != null && logonID.equals("admin")) {
-  		%>
-  		<a href="#">급여관리</a><br>
-  		<a href="#">인사관리</a><br>
-  		<%
-  			}
-  		%>
-  		
+  		<c:if test='${not empty logonID and logonID eq "admin" }'>
+  			<a href="#">급여관리</a><br>
+  			<a href="#">인사관리</a><br>
+  		</c:if>
   		
 	</div>
 	

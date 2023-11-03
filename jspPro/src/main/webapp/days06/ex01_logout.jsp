@@ -1,19 +1,12 @@
 <%@page import="com.util.Cookies"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/inc/auth.jspf" %>
-<%-- <%
-	String cname = "auth"; 
-	String logonID = null; 
-	Cookies cookies = new Cookies(request);
-	if(cookies.exists(cname)) {
-		logonID = cookies.getValue(cname);
-	}
-%> --%>
+<%@ include file="/WEB-INF/inc/session_auth.jspf" %>
 <%
-	// 쿠키 삭제
-	Cookie c = Cookies.createCookie("auth", "", "/", 0);
-	response.addCookie(c);
+	// 세션 삭제(제거)
+	// 1. 즉시 강제 세션 종료
+	session.invalidate();
+	// 2. 요청이 없을 경우 약 20분 지나면 자동으로 세션 종료
 %>
 
 <script>
