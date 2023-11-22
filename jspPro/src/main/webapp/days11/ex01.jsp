@@ -32,26 +32,15 @@
 	</h3>
 	<div>
   		<xmp class="code">
-    	구글 맵 OPEN API
+    	
+    	1. ex02_oracle_input.jsp : 맛집 등록 페이지(모달창)
+    	2. ex02_oracle_input_ok.jsp : 맛집 입력 정보 저장 페이지
+    	3. ex02_oracle_json.jsp : 맛집 등록 후 이동할 페이지
+    	4. ex02_oracle_json_data.jsp
+    	   : ex02_oracle_json.jsp페이지로 이동(로딩)할 때
+    	     ajax를 사용해서 한독 빌딩 주위 맛집을 select한 후 지도에 마커 표시
+    	
   		</xmp>
-  		
-  		<a href="ex01_02.jsp?lat=37.499294&lng=127.0331883">(주)쌍용교육센터</a>
-  		
-		<div id="googleMap" style="width:100%;height:400px"></div>
-		<script>
-		   function myMap(){
-		      var mapOptions = {
-		                       center: new google.maps.LatLng(51.508742, -0.120850)
-		                       , zoom: 5
-		                        }; 
-		      var map = new google.maps.Map( 
-		                                    document.getElementById("googleMap")  
-		                                    , mapOptions 
-		                                    );
-		   }
-		</script> 
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBPLvuvaNXgpGrZwpj_luL18R11xAbGno&callback=myMap"></script>
-  		
 	</div>
 	
 	<script>

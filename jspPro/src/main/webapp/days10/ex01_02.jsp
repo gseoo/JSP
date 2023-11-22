@@ -32,22 +32,43 @@
 	</h3>
 	<div>
   		<xmp class="code">
-    	구글 맵 OPEN API
+    	ex01 -> ex01_02.jsp
   		</xmp>
-  		
-  		<a href="ex01_02.jsp?lat=37.499294&lng=127.0331883">(주)쌍용교육센터</a>
   		
 		<div id="googleMap" style="width:100%;height:400px"></div>
 		<script>
 		   function myMap(){
-		      var mapOptions = {
-		                       center: new google.maps.LatLng(51.508742, -0.120850)
-		                       , zoom: 5
+			   var lat = <%= request.getParameter("lat") %>;
+			   var lng = ${param.lng}; 
+			   var mapCenter = new google.maps.LatLng( lat, lng ); 
+			   var mapCanvas = document.getElementById("googleMap") ;
+			   
+			   var mapOptions = {
+		                       center: mapCenter
+		                       , zoom: 15
 		                        }; 
 		      var map = new google.maps.Map( 
-		                                    document.getElementById("googleMap")  
+		    		 						mapCanvas
 		                                    , mapOptions 
 		                                    );
+		      
+		   	  // 쌍용교육센터의 위치를 표시하는 마커
+		      // 1. 마커, 폴리라인, 다각형, 원, 직사각형, 정보창
+		      var marker = new google.maps.Marker({
+		    	  position: mapCenter
+		    	  //, animation: google.maps.Animation.BOUNCE
+		    	   ,icon: "pinkball.png"
+		      });
+		      marker.setMap(map);
+		      
+		      
+		     // 2. 정보창 표시
+		     var message = "<a href='http://www.sist.co.kr'>쌍용교육센터</a>";
+		     var message = "<a href='http://www.sist.co.kr'><img alt='lezhin.com 로고' src='//img-s-msn-com.akamaized.net/tenant/amp/entityid/BBFwET1.img'></a>";
+		     var infoWindow = new google.maps.InfoWindow({
+		    	 content : message 
+		     });
+		     infoWindow.open(map, marker);
 		   }
 		</script> 
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBPLvuvaNXgpGrZwpj_luL18R11xAbGno&callback=myMap"></script>
